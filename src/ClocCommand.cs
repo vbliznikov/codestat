@@ -3,23 +3,30 @@ using System;
 using System.IO;
 using System.Collections.Generic;
 using System.Linq;
+using Utils.Codestat.Processors;
 
 namespace Utils.Codestat
 {
     public class ClocCommand
     {
+        private IFileProcessor _clocProcessor;
         public ClocCommand(ClocSettings settings)
         {
             Settings = settings;
+            _clocProcessor = new ReportDecorator(new FileCountProcessor());
         }
 
         public ClocSettings Settings { get; }
 
         public void Run()
         {
-            WriteDevider();
             var files = EnumerateFiles();
-            Console.WriteLine("Found:{0:} files", files.Count());
+            foreach (var file in files)
+            {
+                _clocProcessor.Process(file);
+            }
+            WriteDevider();
+            _clocProcessor.WriteReport(Console.Out);
             WriteDevider();
         }
 
@@ -56,13 +63,5 @@ namespace Utils.Codestat
         {
             Console.WriteLine(new String('-', 50));
         }
-    }
-
-    public class ClocSettings
-    {
-        public string Path { get; set; } = ".";
-        public string[] Filter { get; set; } = new string[0];
-
-        public static ClocSettings Default => new ClocSettings();
     }
 }
