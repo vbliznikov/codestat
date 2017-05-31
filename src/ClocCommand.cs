@@ -43,14 +43,15 @@ namespace Utils.Codestat
                 foreach (var entry in Directory.EnumerateFileSystemEntries(path))
                 {
                     if (File.GetAttributes(entry).HasFlag(FileAttributes.Directory))
-                        foldersQue.Enqueue(entry);
-                    else
                     {
-                        if (MatchFilter(entry))
-                            yield return entry;
-                        else
-                            continue;
+                        foldersQue.Enqueue(entry);
+                        continue;
                     }
+                    if (MatchFilter(entry))
+                        yield return entry;
+                    else
+                        continue;
+
                 }
 
             } while (foldersQue.Count > 0);
