@@ -13,7 +13,7 @@ namespace Utils.Codestat
         public ClocCommand(ClocSettings settings)
         {
             Settings = settings;
-            _clocProcessor = new ReportDecorator(new FileCountProcessor());
+            _clocProcessor = new ReportDecorator(new LineCountProcessor(new FileCountProcessor()));
         }
 
         public ClocSettings Settings { get; }
@@ -25,9 +25,7 @@ namespace Utils.Codestat
             {
                 _clocProcessor.Process(file);
             }
-            WriteDevider();
             _clocProcessor.WriteReport(Console.Out);
-            WriteDevider();
         }
 
         protected IEnumerable<string> EnumerateFiles()
@@ -58,10 +56,6 @@ namespace Utils.Codestat
             return Settings.Filter.Length > 0
                 ? Settings.Filter.Any((filter) => value.EndsWith(filter))
                 : true;
-        }
-        private static void WriteDevider()
-        {
-            Console.WriteLine(new String('-', 50));
         }
     }
 }

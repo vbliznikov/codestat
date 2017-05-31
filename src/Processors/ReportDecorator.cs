@@ -1,3 +1,5 @@
+using System;
+
 namespace Utils.Codestat.Processors
 {
     public class ReportDecorator : FileProcessor
@@ -16,10 +18,16 @@ namespace Utils.Codestat.Processors
 
         public override void WriteReport(System.IO.TextWriter writer)
         {
+            WriteDevider();
             writer.Write("Found:");
             if (Next != null)
                 Next.WriteReport(writer);
             writer.Write("\n");
+            WriteDevider();
+        }
+        private static void WriteDevider()
+        {
+            Console.WriteLine(new String('-', 50));
         }
     }
 }
