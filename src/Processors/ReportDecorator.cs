@@ -2,6 +2,7 @@ namespace Utils.Codestat.Processors
 {
     public class ReportDecorator : FileProcessor
     {
+        public ReportDecorator() : this(null) { }
         public ReportDecorator(IFileProcessor next) : base(next) { }
         protected override void OnProcess(string filePath)
         {

@@ -5,7 +5,6 @@ namespace Utils.Codestat.Processors
 
     public abstract class FileProcessor : IFileProcessor
     {
-        public FileProcessor() : this(null) { }
         protected FileProcessor(IFileProcessor next)
         {
             this.Next = next;
