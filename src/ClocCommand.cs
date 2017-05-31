@@ -4,6 +4,7 @@ using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using Utils.Codestat.Processors;
+using Utils.Codestat.Processors.Extensions;
 
 namespace Utils.Codestat
 {
@@ -20,12 +21,15 @@ namespace Utils.Codestat
 
         public void Run()
         {
-            var files = EnumerateFiles();
-            foreach (var file in files)
-            {
-                _clocProcessor.Process(file);
-            }
-            _clocProcessor.WriteReport(Console.Out);
+            EnumerateFiles()
+                .CalculateStats(_clocProcessor)
+                .WriteReport(Console.Out);
+            // foreach (var file in files)
+            // {
+            //     file.AcceptProcessor(_clocProcessor);
+            //     //_clocProcessor.Process(file);
+            // }
+            //_clocProcessor.WriteReport(Console.Out);
         }
 
         protected IEnumerable<string> EnumerateFiles()
