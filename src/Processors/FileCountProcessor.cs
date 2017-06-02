@@ -15,7 +15,7 @@ namespace Utils.Codestat.Processors
 
         protected override void OnWriteReport(TextWriter writer)
         {
-            writer.Write(" {0} files ", _count);
+            writer.Write(" {0} files processed;", _count);
         }
     }
 

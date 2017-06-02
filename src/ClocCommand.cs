@@ -18,6 +18,7 @@ namespace Utils.Codestat
             _clocProcessor = builder
                 .Next<LineCountProcessor>()
                 .Next<FileCountProcessor>()
+                .Decorate<ExceptionHandlerDecorator>()
                 .Decorate<ReportDecorator>()
                 .Build();
         }
@@ -31,8 +32,7 @@ namespace Utils.Codestat
                 .WriteReport(Console.Out);
             // foreach (var file in files)
             // {
-            //     file.AcceptProcessor(_clocProcessor);
-            //     //_clocProcessor.Process(file);
+            //     _clocProcessor.Process(file);
             // }
             //_clocProcessor.WriteReport(Console.Out);
         }

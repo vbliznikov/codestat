@@ -26,7 +26,7 @@ namespace Utils.Codestat.Processors
         }
         protected override void OnWriteReport(TextWriter writer)
         {
-            writer.Write(" {0} lines ", _lineCount);
+            writer.Write(" {0} lines total;", _lineCount);
         }
     }
 }
