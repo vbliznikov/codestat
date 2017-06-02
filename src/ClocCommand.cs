@@ -14,7 +14,12 @@ namespace Utils.Codestat
         public ClocCommand(ClocSettings settings)
         {
             Settings = settings;
-            _clocProcessor = new ReportDecorator(new LineCountProcessor(new FileCountProcessor()));
+            var builder = new ChainBuilder();
+            _clocProcessor = builder
+                .Next<LineCountProcessor>()
+                .Next<FileCountProcessor>()
+                .Decorate<ReportDecorator>()
+                .Build();
         }
 
         public ClocSettings Settings { get; }
