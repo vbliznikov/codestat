@@ -31,8 +31,8 @@ namespace Utils.Codestat.Processors
 
         public void WriteReport(TextWriter writer)
         {
-            if (Next == null) return;
-            Next.WriteReport(writer);
+            if (Next != null)
+                Next.WriteReport(writer);
 
             if (_skipFilesCount > 0)
                 writer.Write(" {0} files skipped;", _skipFilesCount);
