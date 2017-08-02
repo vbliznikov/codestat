@@ -19,11 +19,17 @@ namespace Utils.Codestat.Processors
                     while (!reader.EndOfStream)
                     {
                         reader.ReadLine();
-                        System.Threading.Interlocked.Increment(ref _lineCount);
+                        Increment();
                     }
                 }
             }
         }
+
+        protected void Increment()
+        {
+            System.Threading.Interlocked.Increment(ref _lineCount);
+        }
+
         protected override void OnWriteReport(TextWriter writer)
         {
             writer.Write(" {0} lines total;", _lineCount);

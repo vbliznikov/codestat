@@ -22,7 +22,7 @@ namespace Utils.Codestat.Processors
             {
                 Next.Process(path);
             }
-            catch (System.Exception e)
+            catch (IOException e)
             {
                 _skipFilesCount++;
                 Console.Error.WriteLine("Can't process {0} file.\n{1}", path, e.Message);
